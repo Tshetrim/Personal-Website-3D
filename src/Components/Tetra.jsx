@@ -1,26 +1,40 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 function Tetra(props) {
 	// This reference gives us direct access to the THREE.Mesh object
 	const ref = useRef();
 	// Hold state for hovered and clicked events
-	const [hovered, hover] = useState(false);
+	const [hovered, hover] = useState(props.parentHovered);
 	const [clicked, click] = useState(false);
+	const [child, childed] = useState(props.isChild);
+
+	//When parents hovered prop changes, update this hovered state accordingly 
+	useEffect(() => {
+		hover((prevState) => (props.parentHovered));
+	}, [props.parentHovered]);
+		
 	// Subscribe this component to the render-loop, rotate the mesh every frame
 	useFrame((state, delta) => (ref.current.rotation.x += 0.01));
+
 	// Return the view, these are regular Threejs elements expressed in JSX
 	return (
 		<mesh
 			{...props}
 			ref={ref}
-			scale={clicked ? 1.5 : 1}
+			scale={hovered ? 3 : 1}
 			onClick={(event) => click(!clicked)}
-			onPointerOver={(event) => hover(true)}
-			onPointerOut={(event) => hover(false)}
+			onPointerOver={(event) => {
+				child ? event.stopPropagation() : null;
+				hover(true);
+			}}
+			onPointerOut={(event) => {
+				child ? event.stopPropagation() : null;
+				hover(false);
+			}}
 		>
-			<tetrahedronGeometry args={[1, 1, 1]} />
-			<meshStandardMaterial color={hovered ? "hotpink" : "orange"} />
+			<tetrahedronGeometry args={[0.1, 0]} />
+			<meshStandardMaterial color={hovered ? "white" : "black"} />
 		</mesh>
 	);
 }
