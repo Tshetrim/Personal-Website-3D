@@ -7,7 +7,8 @@ function Tetra(props) {
 	// Hold state for hovered and clicked events
 	const [hovered, hover] = useState(props.parentHovered);
 	const [clicked, click] = useState(false);
-	const [child, childed] = useState(props.isChild);
+	// const [child, childed] = useState(props.isChild);
+	const [child, childed] = useState(false);
 
 	//When parents hovered prop changes, update this hovered state accordingly 
 	useEffect(() => {
@@ -15,7 +16,7 @@ function Tetra(props) {
 	}, [props.parentHovered]);
 		
 	// Subscribe this component to the render-loop, rotate the mesh every frame
-	useFrame((state, delta) => (ref.current.rotation.x += 0.01));
+	useFrame((state, delta) => (ref.current.rotation.y += 0.01));
 
 	// Return the view, these are regular Threejs elements expressed in JSX
 	return (
