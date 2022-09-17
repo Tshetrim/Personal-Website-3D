@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 function Tetra(props) {
+	console.log("r");
 	// This reference gives us direct access to the THREE.Mesh object
 	const ref = useRef();
 	// Hold state for hovered and clicked events

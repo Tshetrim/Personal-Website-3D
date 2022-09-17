@@ -12,6 +12,9 @@ import { FirstPersonControls, RoundedBox } from "@react-three/drei";
 import useWindowDimensions from "./Hooks/useWindowDimenstions";
 import "./styles/App.css";
 
+
+
+
 function ThreeScene() {
 	const { width, height } = useWindowDimensions();
 
