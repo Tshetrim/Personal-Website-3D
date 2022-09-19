@@ -20,7 +20,7 @@ function Torus(props) {
 			onPointerOut={(event) => hover(false)}
 		>
 			<torusGeometry args={[10, 3, 16, 100]} />
-			<meshStandardMaterial color={hovered ? "red" : "white"} />
+			<meshStandardMaterial wireframe={true} color={hovered ? "red" : "white"} />
 		</mesh>
 	);
 }

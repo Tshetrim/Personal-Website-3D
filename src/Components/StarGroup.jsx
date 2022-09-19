@@ -8,8 +8,7 @@ function StarGroup(props) {
 	// This reference gives us direct access to the THREE.Mesh object
 
 	//state for number of tetra for the star
-	const { numStars, starSpreadDistance, numChildRange, childSpreadDistance } =
-		props;
+	const { numStars, starSpreadDistance, numChildRange, childSpreadDistance } = props;
 
 	//saving position for children
 	const [positions] = useState(
@@ -29,7 +28,7 @@ function StarGroup(props) {
 
 	//generating children without using state because hovering should change the prop - might not be optimal
 	const stars = new Array(numStars ? numStars : 0).fill().map((el, i) => {
-        console.log("New star group");
+        //console.log("New star group");
 		const numChild = numChildArr[i];
 		const [x, y, z] = positions[i];
 		return (

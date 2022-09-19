@@ -8,7 +8,7 @@ function InvisibleCenter(props) {
 
 	const ref = useRef();
 
-	useFrame((state, delta) => (ref.current.rotation.y += 0.005));
+	useFrame((state, delta) => (ref.current.rotation.y += 0.002));
 
 	return (
 		<mesh {...props} ref={ref}>

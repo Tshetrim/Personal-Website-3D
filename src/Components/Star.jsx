@@ -8,7 +8,7 @@ function Star(props) {
 	const ref = useRef();
 	
 	//state for number of tetra for the star
-	const {numChild, childSpreadDistance} = props;
+	const {numChild, childSpreadDistance, position} = props;
 	
 	// Hold state for hovered and clicked events
 	const [hovered, hover] = useState(false);
@@ -20,14 +20,18 @@ function Star(props) {
 	}));
 
 	//generating children without using state because hovering should change the prop - might not be optimal
-	const nodesCubes = new Array(numChild ? numChild : 0).fill().map((el, i) => {
+	const childOrbiters = new Array(numChild ? numChild : 0).fill().map((el, i) => {
 		const [x, y, z] = positions[i];
 		return <Tetra key={i} position={[x, y, z]} isChild={true} parentHovered={hovered}/>;
 	});
 
 	// Subscribe this component to the render-loop, rotate the mesh every frame
-	useFrame((state, delta) => (ref.current.rotation.y += 0.01));
+	useFrame((state, delta) => (ref.current.rotation.y += 0.05));
 	// Return the view, these are regular Threejs elements expressed in JSX
+
+
+	//const r = Math.floor(Math.abs(position[0]*3 % 255)), g=Math.floor(Math.abs(position[1]*3 % 255)), b= Math.floor(Math.abs(position[2]*3 % 255));
+
 	return (
 		<mesh
 			{...props}
@@ -40,9 +44,11 @@ function Star(props) {
 				hover(false)}}
 		>
 			<sphereGeometry args={[0.5, 24, 24]} />
+			{/* <meshStandardMaterial color={hovered ? "yellow" : `rgba(${r}, ${g}, ${b})`} /> */}
+			
 			<meshStandardMaterial color={hovered ? "yellow" : "white"} />
 			<group>
-				{nodesCubes}
+				{childOrbiters}
 			</group>
 		</mesh>
 	);

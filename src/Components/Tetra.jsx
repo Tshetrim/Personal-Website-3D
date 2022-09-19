@@ -2,7 +2,8 @@ import { useRef, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 
 function Tetra(props) {
-	console.log("r");
+	//console.log("r");
+	
 	// This reference gives us direct access to the THREE.Mesh object
 	const ref = useRef();
 	// Hold state for hovered and clicked events
@@ -36,7 +37,7 @@ function Tetra(props) {
 			}}
 		>
 			<tetrahedronGeometry args={[0.1, 0]} />
-			<meshStandardMaterial color={hovered ? "white" : "black"} />
+			<meshStandardMaterial color={hovered ? "red" : "white"} />
 		</mesh>
 	);
 }
